@@ -1,6 +1,8 @@
 package modelo;
 
-public abstract class Personagem {
+import java.io.Serializable;
+
+public abstract class Personagem implements Serializable {
     private String nome;
     private int vida;
     private int ataque;
@@ -13,33 +15,22 @@ public abstract class Personagem {
         this.defesa = defesa;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public int getVida() {
-        return vida;
-    }
-
-    public int getAtaque() {
-        return ataque;
-    }
-
-    public int getDefesa() {
-        return defesa;
-    }
+    public String getNome() { return nome; }
+    public int getVida() { return vida; }
+    public int getAtaque() { return ataque; }
+    public int getDefesa() { return defesa; }
 
     public void receberDano(int dano) {
         int danoFinal = dano - defesa;
         if (danoFinal > 0) {
-            vida -= danoFinal;
-            if (vida < 0) {
-                vida = 0;
-            }
+            this.vida -= danoFinal;
+            if (this.vida < 0) this.vida = 0;
         }
     }
 
-    public boolean estaVivo() {
-        return vida > 0;
+    public void curar(int quantidade) {
+        this.vida += quantidade;
     }
+
+    public boolean estaVivo() { return vida > 0; }
 }
